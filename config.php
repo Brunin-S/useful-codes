@@ -5,30 +5,13 @@ $username = 'root';
 $password = '';
 
 try {
-    // Conectar ao banco de dados usando PDO
+    // Tenta conectar ao banco de dados
     $pdo = new PDO($dsn, $username, $password);
 
-    // Definir o modo de tratamento de erros para exceções
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Exemplo de consulta SQL
-    $sql = "SELECT * FROM login";
-
-    // Preparar a consulta
-    $stmt = $pdo->prepare($sql);
-
-    // Executar a consulta
-    $stmt->execute();
-
-    // Obter resultados
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Iterar sobre os resultados
-    foreach ($results as $row) {
-        echo $row['name'] . ' - ' . $row['email'] . '<br>';
-    }
+    // Se a conexão for bem-sucedida, exibe mensagem de sucesso
+    echo "Conexão bem-sucedida!";
 } catch (PDOException $e) {
-    // Lidar com erros de conexão
-    echo 'Erro de conexão: ' . $e->getMessage();
+    // Se houver um erro, captura a exceção e exibe mensagem de erro
+    echo "Erro de conexão: " . $e->getMessage();
 }
 ?>
